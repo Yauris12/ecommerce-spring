@@ -1,14 +1,24 @@
 package com.ecommerce.app.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
-public class Orden {
 
+@Entity
+@Table(name="ordenes")
+public class Orden {
+@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 private Integer id;
 private String numero;
 private Date fechaCreaccion;
 private Date fechaRecibida;
 private double total;
+
+@ManyToOne
+private Usuario usuario ;
+
+@OneToOne(mappedBy = "orden")
+private DetalleOrden detalle;
 
 
     public Orden() {
@@ -60,6 +70,22 @@ private double total;
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public DetalleOrden getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(DetalleOrden detalle) {
+        this.detalle = detalle;
     }
 
     @Override
