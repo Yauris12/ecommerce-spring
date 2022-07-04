@@ -7,6 +7,7 @@ import com.ecommerce.app.service.ProductoService;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,9 @@ public class ProductoController {
     @Autowired
     private ProductoService  productoService;
     @GetMapping("")
-    public String  show(){
+    public String  show(Model model){
+
+       model.addAttribute("productos",productoService.findALL());
         return "productos/show";
     }
 
@@ -39,5 +42,7 @@ public class ProductoController {
 
         return "redirect:/productos";
     }
+
+
 
 }
